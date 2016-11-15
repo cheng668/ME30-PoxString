@@ -4,7 +4,7 @@ template<typename T>
 class RCPtr {
 public:
 	RCPtr(const RCPtr& rhs);
-	RCPtr(const T* rhs = 0);
+	RCPtr(T* rhs = 0);
 	RCPtr& operator=(const RCPtr& rhs);
 	T& operator*() const;
 	T* operator->() const;
@@ -31,7 +31,7 @@ RCPtr<T>::RCPtr(const RCPtr& rhs):pointee(rhs.pointee)
 }
 /*ππ‘Ï*/
 template<typename T>
-RCPtr<T>::RCPtr(const T* rhs):pointee(rhs)
+RCPtr<T>::RCPtr(T* rhs):pointee(rhs)
 {
 	init();
 }
