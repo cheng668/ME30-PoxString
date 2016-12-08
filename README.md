@@ -29,7 +29,7 @@ ME30-PoxString
   PoxString[5] += 5;  //错误，没有从int到PoxChar的转换
   PoxString[5]++;     //错误，PoxChar不能进行++操作
 ```  
-  解决方法：重载操作符
+* 解决方法：重载操作符
   
 ### 不能通过PoxChar调用真实对象的成员函数
    如果char对象中有一个转换类型的函数 int toInt();
