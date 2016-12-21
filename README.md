@@ -1,14 +1,16 @@
 ME30-PoxString
 =================================== 
 * 程序来自《More Effective C++》条款30，书中还指出此程序的限制：
+
 ### 类型转换出错
-```
+
+```c
   PoxString s1 = "test";
 
   char* p = &s1[1]; //这类取地址符号&会报错，因为没有从PoxChar到char*的转换
 ```  
 * 解决方法：重载&操作符：
-```
+```c
   const char* PoxChar::operator&() const
   {
     return &(m_theString.value->m_pValue[m_iIdx]);
@@ -24,7 +26,7 @@ ME30-PoxString
   }
 ```
 ### 很多操作符需要重载
-```
+```c
   PoxString[5] = 22; //没问题
   PoxString[5] += 5;  //错误，没有从int到PoxChar的转换
   PoxString[5]++;     //错误，PoxChar不能进行++操作
@@ -34,20 +36,20 @@ ME30-PoxString
 ### 不能通过PoxChar调用真实对象的成员函数
    如果char对象中有一个转换类型的函数 int toInt();
    那么调用
-```  
+```c  
   PoxString s = "test";
   s[1].toInt();  //错误，PoxChar不存在toInt()函数
 ```    
 * 解决方法：重载真实对象的成员函数
   
 ### 不能为转换引用类型
-```  
+```c  
   void swap(char& a, char& b);
   PoxString s = "+C+";
   swap(s[0],s[1]);   //错误，没有从PoxChar到char&的转换
 ```    
 ### 不能进行某些类型的隐式转换
-```  
+```c  
   class TVStation{
   public:
     TVStation(char channel);
